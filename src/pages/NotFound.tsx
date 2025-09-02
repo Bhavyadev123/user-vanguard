@@ -1,5 +1,10 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { cardVariants } from "@/components/ui/card-variants";
+import { buttonVariants } from "@/components/ui/button-variants";
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,13 +17,27 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
+    <div className="min-h-screen bg-gradient-secondary flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <Card className={cn(cardVariants({ variant: "elevated", padding: "lg" }), "text-center")}>
+          <CardHeader>
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-destructive/10 flex items-center justify-center">
+              <span className="text-3xl font-bold text-destructive">404</span>
+            </div>
+            <CardTitle className="text-2xl font-bold">Page Not Found</CardTitle>
+            <CardDescription>
+              Oops! The page you're looking for doesn't exist.
+            </CardDescription>
+          </CardHeader>
+          
+          <CardContent>
+            <Link to="/">
+              <Button className={cn(buttonVariants({ variant: "hero", size: "lg" }), "w-full")}>
+                Return to Home
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
